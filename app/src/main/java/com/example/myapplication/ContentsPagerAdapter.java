@@ -4,10 +4,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.example.myapplication.Fragment.FeedFragment;
-import com.example.myapplication.Fragment.HomeFragment;
-import com.example.myapplication.Fragment.MeetingFragment;
-import com.example.myapplication.Fragment.SettingFragment;
+import com.example.myapplication.feed.FeedFragment;
+import com.example.myapplication.meeting.MeetingFragment;
+import com.example.myapplication.setting.SettingFragment;
+
 
 public class ContentsPagerAdapter extends FragmentStatePagerAdapter {
     private int mPageCount;
