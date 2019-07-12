@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -11,6 +12,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -85,21 +87,24 @@ public class MainActivity extends AppCompatActivity {
 
         /*   Tool Bar   */
         setSupportActionBar(toolbar);
-        toolbar_icon.setOnClickListener(new View.OnClickListener() {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.navi);
+
+        drawerToggle = new ActionBarDrawerToggle(
+                this,
+                drawerLayout,
+                toolbar,
+                R.string.open,
+                R.string.close
+        );
+        drawerLayout.addDrawerListener(drawerToggle);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                switch (view.getId()){
-                    case R.id.toolbar_icon:
-                        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
-                            drawerLayout.closeDrawer(GravityCompat.START);
-                        }else{
-                            drawerLayout.openDrawer(GravityCompat.START);
-                        }
-                        break;
-                }
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                /*   when item selected   */
+                return false;
             }
         });
-
         /*  tooggle  */
 
     }
@@ -110,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         mViewPager = (ViewPager)findViewById(R.id.pager_content);
         drawerLayout = findViewById(R.id.drawerlayout);
-        toolbar_icon = findViewById(R.id.toolbar_icon);
+        navigationView = findViewById(R.id.navi);
     }
 
 }
