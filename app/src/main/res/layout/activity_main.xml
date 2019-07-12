@@ -22,21 +22,23 @@
             layout="@layout/toolbar"
             />
 
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/layout_tab"
+            android:layout_width="match_parent"
+            android:layout_height="98dp"
+            app:tabGravity="center"
+            app:tabBackground="@color/colorPrimary"
+            app:tabIndicatorColor="@color/colorPrimary"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="@color/colorPrimary"
+            app:tabTextColor="@android:color/white" />
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/pager_content"
             android:layout_width="match_parent"
-            android:layout_height="412dp" />
+            android:layout_height="wrap_content" />
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/layout_tab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:tabGravity="fill"
-            app:tabIndicatorColor="@color/colorPrimary"
-            app:tabMode="scrollable"
-            app:tabSelectedTextColor="@color/colorPrimary"
-            app:tabTextColor="#000000" />
+
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
