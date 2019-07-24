@@ -9,8 +9,13 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +24,8 @@ import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
+
+import java.security.MessageDigest;
 
 public class MainActivity extends AppCompatActivity {
     private TabLayout mTabLayout;
@@ -39,6 +46,24 @@ public class MainActivity extends AppCompatActivity {
         initViews(); //findviewbyid
         initMainLayout();
     }
+
+    //getting hash key
+//    private void getAppKeyHash() {
+//        try {
+//            PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNING_CERTIFICATES);
+//            for (Signature signature : info.signingInfo.getApkContentsSigners()) {
+//                MessageDigest md;
+//                md = MessageDigest.getInstance("SHA");
+//                md.update(signature.toByteArray());
+//                String something = new String(Base64.encode(md.digest(), 0));
+//                Log.e("Hash key", something);
+//                System.out.println(something);
+//            }
+//        } catch (Exception e) {
+//            // TODO Auto-generated catch block
+//            Log.e("name not found", e.toString());
+//        }
+//    }
 
     private View createTabView(String string, Drawable drawable){
         View tabView = LayoutInflater.from(mContext).inflate(R.layout.custom_tab, null);
