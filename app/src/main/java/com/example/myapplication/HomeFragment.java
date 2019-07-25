@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -27,7 +28,7 @@ import net.daum.mf.map.api.MapView;
 
 import static android.content.Context.LOCATION_SERVICE;
 
-public class HomeFragment extends Fragment implements MapView.CurrentLocationEventListener{
+public class HomeFragment extends Fragment implements MapView.CurrentLocationEventListener, Button.OnClickListener{
 
     private static final String LOG_TAG = "HomeFragment";
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
@@ -36,6 +37,9 @@ public class HomeFragment extends Fragment implements MapView.CurrentLocationEve
 
     private MapView mapView;
     ViewGroup mapViewContainer;
+    Button gps_btn;
+    MapPoint current_mapPoint;
+
     FloatingActionButton fab_gps;
     private MapReverseGeoCoder mReverseGeoCoder = null;
     private boolean isUsingCustomLocationMarker = false;
@@ -50,16 +54,17 @@ public class HomeFragment extends Fragment implements MapView.CurrentLocationEve
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        gps_btn = view.findViewById(R.id.gps_btn);
         mapViewContainer = view.findViewById(R.id.map_view);
         mapView = new MapView(getContext());
         mapView.setCurrentLocationEventListener(this);
         mapViewContainer.addView(mapView);
 
-        if (!checkLocationServicesStatus()) {
+        gps_btn.setOnClickListener(this);
 
+        if (!checkLocationServicesStatus()) {
             showDialogForLocationServiceSetting();
         }else {
-
             checkRunTimePermission();
         }
 
@@ -76,6 +81,7 @@ public class HomeFragment extends Fragment implements MapView.CurrentLocationEve
     @Override
     public void onCurrentLocationUpdate(MapView mapView, MapPoint mapPoint, float accuracyInMeters) {
         MapPoint.GeoCoordinate mapPointGeo = mapPoint.getMapPointGeoCoord();
+        current_mapPoint = mapPoint;
         Log.i(LOG_TAG, String.format("MapView onCurrentLocationUpdate (%f,%f) accuracy (%f)", mapPointGeo.latitude, mapPointGeo.longitude, accuracyInMeters));
 
     }
@@ -235,5 +241,11 @@ public class HomeFragment extends Fragment implements MapView.CurrentLocationEve
 
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
                 || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+    }
+
+    //gps button
+    @Override
+    public void onClick(View view) {
+        mapView.setMapCenterPoint(current_mapPoint, false);
     }
 }
