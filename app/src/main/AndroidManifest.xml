@@ -12,7 +12,10 @@
         android:label=" "
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:hardwareAccelerated="true">
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,13 +25,22 @@
         </activity>
 
         <activity android:name=".LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity android:name=".JoinActivity"></activity>
 
+
+
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="6a3346058cedac5f976a51d870adb11f"/>
+
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
 
     </application>
 
