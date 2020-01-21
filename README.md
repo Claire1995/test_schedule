@@ -1,7 +1,7 @@
 # Test Schedule Android Application
 Android application for scheduling of workers in company
 
-### Feature
+### Features
 1. **Calendar**
 to check dates and register what to do
 
