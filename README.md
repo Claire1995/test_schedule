@@ -1,4 +1,4 @@
-# Test Schedule Android Application
+# Test Schedule Android Application :zap:
 Android application for scheduling of workers in company
 
 ### Features
